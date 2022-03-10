@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Feedback Form</title>
+<style>
+body {
+    background-image: url(https://i.redd.it/oor2svn052l61.png);
+    background-size: cover;
+    font-size: 20px;
+    font-family: Lucida;
+}
+
+form {
+    width: 500px;
+    padding: 15px 40px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    margin: 5% auto;
+    box-shadow: 0 0 10px white;
+}
+form:hover{
+    box-shadow: 0 0 10px #979fe9;
+}
+.form{
+    width: 100%;
+}
+h2 {
+    font-size: 200%;
+    text-align: center;
+    color: rgb(46, 43, 133);
+}
+label {
+    display: block;
+    margin-bottom: 5px
+}
+label i {
+    color: #999;
+    font-size: 80%;
+}
+.error {
+    color: red;
+    font-size: 90%;
+}
+
+input[type=text], select{
+    cursor: text;
+    font-size: 100%;
+    width: 50%;    
+    padding: 8px;    
+    border: 2px solid rgb(30, 28, 92);    
+    border-radius: 10px;    
+    text-align:center;
+    resize: vertical;
+}
+
+input[type="submit"] {
+    font-size: 100%;
+    font-style: bold;
+    background: #979fe9;
+    border-color: rgb(42, 41, 102);
+    box-shadow: 0 0 10px rgb(42, 41, 102);
+    color: rgb(42, 41, 102);
+    margin-top: 10px;
+    padding: 10px 20px;     
+    border-radius: 10px;    
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background: rgb(30, 28, 92);
+    color: white;
+    border-color: #ffffff;
+    box-shadow: 0 0 10px #979fe9;
+}
+
+.input-1{
+    background-color: #b3eec6;
+}
+.input-2{
+    background-color: rgb(233, 168, 168);
+}
+.input-3{
+    border:1px solid #01cc40!important;
+}
+.input-4{
+    border:1px solid red;
+}
+.form-gender {
+    border: 2px solid rgb(42, 41, 102);
+    padding: 8px 10px 4px;
+    border-radius: 10px;
+}
+</style>
+<script>
+function printError(Id, Msg) {
+    document.getElementById(Id).innerHTML = Msg;
+}
+function validateForm() {
+
+    var name = document.Form.name.value;
+    var email = document.Form.email.value;
+    var mobile = document.Form.mobile.value;
+    var rati = document.Form.rati.value;
+    var gender = document.Form.gender.value;
+    
+    var nameErr = emailErr = mobileErr = ratiErr = genderErr = true;
+    
+    if(name == "") {
+        printError("nameErr", "Please enter your Full name");
+        var elem = document.getElementById("name");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } 
+    else {
+        var regex = /^[a-zA-Z\s]+$/;                
+        if(regex.test(name) === false) {
+            printError("nameErr", "Please enter a valid name");
+            var elem = document.getElementById("name");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } 
+        else {
+            printError("nameErr", "");
+            nameErr = false;
+            var elem = document.getElementById("name");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");            
+        }
+    }
+    
+    if(email == "") {
+        printError("emailErr", "Please enter your email address");
+         var elem = document.getElementById("email");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } 
+    else {
+        
+        var regex = /^\S+@\S+\.\S+$/;
+        if(regex.test(email) === false) {
+            printError("emailErr", "Please enter a valid email address");
+            var elem = document.getElementById("email");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        } 
+        else{
+            printError("emailErr", "");
+            emailErr = false;
+             var elem = document.getElementById("email");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+        }
+    }
+    
+    if(mobile == "") {
+        printError("mobileErr", "Please enter your mobile number");
+        var elem = document.getElementById("mobile");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+    } 
+    else {
+        var regex = /^[1-9]\d{9}$/;
+        if(regex.test(mobile) === false) {
+            printError("mobileErr", "Please enter a valid 10 digit mobile number");
+            var elem = document.getElementById("mobile");
+            elem.classList.add("input-2");
+            elem.classList.remove("input-1");
+        }
+        else{
+            printError("mobileErr", "");
+            mobileErr = false;
+            var elem = document.getElementById("mobile");
+            elem.classList.add("input-1");
+            elem.classList.remove("input-2");
+        }
+    }
+
+    if(rati == "Select") {
+        printError("ratiErr", "Please spare a second to rate us.");
+        var elem = document.getElementById("rati");
+            elem.classList.add("input-4");
+            elem.classList.remove("input-3");
+    } 
+    else {
+        printError("ratiErr", "");
+        ratiErr = false;
+        var elem = document.getElementById("rati");
+            elem.classList.add("input-3");
+            elem.classList.remove("input-4");
+    }
+    
+    if(gender == "") {
+        printError("genderErr", "Please select your gender");
+        var elem = document.getElementById("gender");
+            elem.classList.add("input-4");
+            elem.classList.remove("input-3");
+    } 
+    else {
+        printError("genderErr", "");
+        genderErr = false;
+        var elem = document.getElementById("gender");
+            elem.classList.add("input-3");
+            elem.classList.remove("input-4");
+    }
+
+    if((nameErr || emailErr || mobileErr || ratiErr || genderErr) == true) {
+       return false;
+    } 
+};
+</script>
+</head>
+<body>
+<form name="Form" onsubmit= "return validateForm()">
+    <h2>Feedback Form</h2>
+    <div class="box">
+        <label>Full Name</label>
+        <input type="text" name="name" id="name">
+        <div class="error" id="nameErr"></div>
+    </div><br>
+    <div class="box">
+        <label>Email Address</label>
+        <input type="text" name="email" id="email">
+        <div class="error" id="emailErr"></div>
+    </div><br>
+    <div class="box">
+        <label>Mobile Number</label>
+        <input type="text" name="mobile" maxlength="10" id="mobile">
+        <div class="error" id="mobileErr"></div>
+    </div><br>
+    <div class="box">
+        <label>Gender</label>
+        <div class="form-gender" id="gender">
+            <label><input type="radio" name="gender" value="male">Male</label><br>
+            <label><input type="radio" name="gender" value="female">Female</label><br> 
+            <label><input type="radio" name="gender" value="dk">Rather not say</label> 
+        </div>
+        <div class="error" id="genderErr"></div>
+    </div><br>
+    <div class="box">
+        <label>Rate our services</label>
+        <select name="rati" id="rati">
+            <option>Select</option>
+            <option>5 star</option>
+            <option>4 star</option>
+            <option>3 star</option>
+            <option>2 star</option>
+            <option>1 star</option>
+        </select> 
+        <div class="error" id="ratiErr"></div>
+    </div><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
